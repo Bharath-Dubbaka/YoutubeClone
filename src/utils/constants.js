@@ -9,6 +9,6 @@ export const HAMBURGER_ICON_URL =
 export const BTN_SEARCH_ICON_URL =
    "https://cdn.iconfinder.com/stored_data/1844913/128/png?token=1724099995-vWZ0UavybhHl4OgT1YQhetNjpYT5nppi7fKf%2B%2BZSbmw%3D";
 
-export const YOUTUBE_API_URL =
-   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=" +
-   import.meta.env.YOUTUBE_API_KEY;
+export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=US&key=${
+   import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
+}`;
