@@ -12,3 +12,6 @@ export const BTN_SEARCH_ICON_URL =
 export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=40&regionCode=IN&key=${
    import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
 }`;
+
+export const YT_VIDEO_ID_DETAILS =
+   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=";

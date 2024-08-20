@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
    const navStatus = useSelector((store) => store.nav.nav);
-   console.log(navStatus);
+   // console.log(navStatus);
 
    if (!navStatus) return null;
    return (
@@ -11,7 +12,9 @@ const Sidebar = () => {
          <div className="mb-4">
             {/* <div className="font-extrabold">Subscriptions</div> */}
             <ul>
-               <li>Home</li>
+               <Link to="/">
+                  <li>Home</li>
+               </Link>
                <li>Shorts</li>
                <li>Videos</li>
                <li>Saved</li>

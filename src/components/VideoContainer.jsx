@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_API_URL } from "../utils/constants";
 import VideoCard from "./VideoCard";
+import { Link } from "react-router-dom";
 
 const VideoContainer = () => {
    const [popVideos, setPopVideos] = useState([]);
@@ -19,7 +20,13 @@ const VideoContainer = () => {
    return (
       <div className="bg-[#0F0F0F] text-white flex flex-wrap justify-around mb-8">
          {popVideos.map((video) => (
-            <VideoCard key={video.id} videoDetails={video} />
+            <Link
+               key={video.id}
+               to={"/watch?v=" + video.id}
+               className="no-underline decoration-transparent w-3/4 sm:w-42  md:w-[23%]"
+            >
+               <VideoCard videoDetails={video} />
+            </Link>
          ))}
       </div>
    );

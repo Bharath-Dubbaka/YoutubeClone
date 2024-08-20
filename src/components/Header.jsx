@@ -8,23 +8,26 @@ import {
 import { useDispatch } from "react-redux";
 import { navigation } from "../utils/appStore/navSlice";
 import { useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 const Header = () => {
    const dispatch = useDispatch();
    const handleSidebar = () => {
       dispatch(navigation());
-      console.log("Clicked")
+      console.log("Clicked");
    };
    return (
       <>
          <div className="flex justify-between align-middle items-center -mt-4 sm:-mt-2 md:-mt-2 ">
-            <div className="flex items-center cursor-pointer" onClick={handleSidebar}>
+            <div className="flex items-center cursor-pointer">
                <img
                   src={HAMBURGER_ICON_URL}
                   alt="hamburgerMenu"
                   className="pl-4 h-8"
+                  onClick={handleSidebar}
                />
-               <img src={YT_LOGO_URL} alt="logoYT" className="h-24 pl-4" />
+               {/* <Link to="/"> */}
+                  <img src={YT_LOGO_URL} alt="logoYT" className="h-24 pl-4" />
+               {/* </Link> */}
             </div>
             <div className="hidden sm:flex md:flex items-center justify-center text-lg w-[100%] sm:w-[70%] md:w-[70%]">
                <form
