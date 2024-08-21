@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_API_URL } from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
+import { hocVideo } from "./VideoCard";
 
 const VideoContainer = () => {
+   const HighTrendingVideo = hocVideo(VideoCard);
    const [popVideos, setPopVideos] = useState([]);
    const ytPopularVids = async () => {
       const data = await fetch(YOUTUBE_API_URL);
@@ -25,7 +27,12 @@ const VideoContainer = () => {
                to={"/watch?v=" + video.id}
                className="no-underline decoration-transparent w-3/4 sm:w-42  md:w-[23%]"
             >
-               <VideoCard videoDetails={video} />
+               {video?.statistics?.viewCount > 1900000 ? (
+                  //<HocVideo videoDetails={video} />
+                  <HighTrendingVideo videoDetails={video} />
+               ) : (
+                  <VideoCard videoDetails={video} />
+               )}
             </Link>
          ))}
       </div>

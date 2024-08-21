@@ -28,11 +28,11 @@ const WatchPage = () => {
    if (!vidDetails) return null;
    console.log(vidDetails);
    return (
-      <div className="flex justify-between w-full">
-         <div className="mx-8 ml-14 w-[60%]">
+      <div className="flex justify-between w-full overflow-hidden">
+         <div className="mx-8 ml-4 min-w-[68%]">
             <iframe
                className=" rounded-lg w-full"
-               width="876"
+             
                height="493"
                src={
                   "https://www.youtube.com/embed/" +
@@ -56,7 +56,7 @@ const WatchPage = () => {
             </div>
          </div>
          {/* suggestions tab */}
-         <div className="max-w-[35%] min-w-[18%]">
+         <div className="max-w-[30%] min-w-[18%]">
             <div className="p-4">{vidDetails?.snippet?.description}</div>
             <div className="p-4">{vidDetails?.snippet?.description}</div>
             <div className="p-4">{vidDetails?.snippet?.description}</div>

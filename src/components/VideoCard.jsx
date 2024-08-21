@@ -1,16 +1,13 @@
 import React from "react";
 
 const VideoCard = ({ videoDetails }) => {
-//    console.log(videoDetails);
+   //    console.log(videoDetails);
    const handleSelectVideo = () => {
       console.log("clicked ");
    };
    //    if (!videoDetails?.snippet?.thumbnails?.maxres) return null;
    return (
-      <div
-         className=" mt-4 cursor-pointer "
-         onClick={handleSelectVideo}
-      >
+      <div className=" mt-4 cursor-pointer  " onClick={handleSelectVideo}>
          {/* <div className="rounded-lg"> */}
          <img
             className="w-full rounded-xl max-h-60 sm:max-h-48 md:max-h-48 object-cover"
@@ -39,3 +36,23 @@ const VideoCard = ({ videoDetails }) => {
 };
 
 export default VideoCard;
+
+export const hocVideo = (VideoCard) => {
+   return (props) => {
+      return (
+         <div className=" -mt-6">
+            <div className="relative top-7 right-2 font-bold">🔥</div>
+            <VideoCard {...props} />
+         </div>
+      );
+   };
+};
+
+// export const HocVideo = ({ videoDetails }) => {
+//    return (
+//       <div className=" -mt-6">
+//          <div className="relative top-7 right-2 font-bold">🔥</div>
+//          <VideoCard videoDetails={videoDetails} />
+//       </div>
+//    );
+// };

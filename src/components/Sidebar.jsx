@@ -56,6 +56,24 @@ const Sidebar = () => {
                <li>Gaming</li>
             </ul>
          </div>
+         <div className="mb-4">
+            <div className="font-extrabold">Near you</div>
+            <ul>
+               <li>Music</li>
+               <li>Movies</li>
+               <li>Sports</li>
+               <li>Gaming</li>
+            </ul>
+         </div>
+         <div className="mb-4">
+            <div className="font-extrabold">View More</div>
+            <ul>
+               <li>Music</li>
+               <li>Movies</li>
+               <li>Sports</li>
+               <li>Gaming</li>
+            </ul>
+         </div>
       </div>
    );
 };
