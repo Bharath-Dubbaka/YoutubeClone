@@ -3,11 +3,12 @@ import { useDispatch } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { closeNav } from "../utils/appStore/navSlice";
 import { YT_VIDEO_ID_DETAILS } from "../utils/constants";
+import CommentsContainer from "./CommentsContainer";
 
 const WatchPage = () => {
    const [urlParam] = useSearchParams();
    const ytKeyURL = urlParam.get("v");
-   console.log(urlParam.get("v"));
+   // console.log(urlParam.get("v"));
    const dispatch = useDispatch();
    const [vidDetails, setVidDetails] = useState(null);
 
@@ -26,13 +27,12 @@ const WatchPage = () => {
       videoKeyDetails(ytKeyURL);
    }, []);
    if (!vidDetails) return null;
-   console.log(vidDetails);
+   // console.log(vidDetails);
    return (
       <div className="flex justify-between w-full overflow-hidden">
          <div className="mx-8 ml-4 min-w-[68%]">
             <iframe
                className=" rounded-lg w-full"
-             
                height="493"
                src={
                   "https://www.youtube.com/embed/" +
@@ -40,10 +40,10 @@ const WatchPage = () => {
                   "?autoplay=1&mute=0"
                }
                title="BLACK MYTH WUKONG Walkthrough Gameplay Part 2 - BLACK BEAR GUAI BOSS (FULL GAME)"
-               frameborder="0"
+               frameBorder="0"
                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-               referrerpolicy="strict-origin-when-cross-origin"
-               allowfullscreen
+               referrerPolicy="strict-origin-when-cross-origin"
+               allowFullScreen
             ></iframe>
             <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.title}
@@ -51,9 +51,10 @@ const WatchPage = () => {
             <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.channelTitle}
             </div>
-            <div className="mt-4 pl-1 font-semibold text-2xl">
+            {/* <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.description}
-            </div>
+            </div> */}
+            <CommentsContainer />
          </div>
          {/* suggestions tab */}
          <div className="max-w-[30%] min-w-[18%]">
