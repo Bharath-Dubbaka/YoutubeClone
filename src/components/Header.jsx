@@ -6,14 +6,15 @@ import {
    USER_ICON_URL,
    YT_LOGO_URL,
 } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { navigation } from "../utils/appStore/navSlice";
+import { cacheResults } from "../utils/appStore/searchCacheSlice";
 
 const Header = () => {
    const [searchText, setSearchText] = useState("");
    const [suggestions, setSuggestions] = useState([]);
    const [showSuggestions, setShowSuggestions] = useState(false);
-
+   const cache = useSelector((store) => store.searchCache.searchStrings);
    const dispatch = useDispatch();
    const handleSidebar = () => {
       dispatch(navigation());
@@ -23,7 +24,11 @@ const Header = () => {
    useEffect(() => {
       // console.log(searchText, "searchTextSearchText");
       const debouncingTimer = setTimeout(() => {
-         autoSuggestCall();
+         if (cache[searchText]) {
+            setSuggestions(cache[searchText]);
+         } else {
+            autoSuggestCall();
+         }
       }, 300);
       return () => {
          clearTimeout(debouncingTimer);
@@ -35,6 +40,11 @@ const Header = () => {
       const json = await data.json();
       setSuggestions(json[1]);
       // console.log(json, "SUGGESTIONS FROM API");
+      dispatch(
+         cacheResults({
+            [searchText]: json[1],
+         })
+      );
    };
    return (
       <>
