@@ -30,15 +30,15 @@ const WatchPage = () => {
    if (!vidDetails) return null;
    // console.log(vidDetails);
    return (
-      <div className="flex justify-between w-full overflow-hidden">
-         <div className="mx-8 ml-4 min-w-[68%]">
+      <div className="flex  justify-evenly w-full overflow-hidden">
+         <div className="mx-8 ml-4 w-[65%]">
             <iframe
                className=" rounded-lg w-full"
                height="493"
                src={
                   "https://www.youtube.com/embed/" +
                   ytKeyURL +
-                  "?autoplay=1&mute=0"
+                  "?autoplay=1&mute=0&rel=0"
                }
                title="BLACK MYTH WUKONG Walkthrough Gameplay Part 2 - BLACK BEAR GUAI BOSS (FULL GAME)"
                frameBorder="0"
@@ -58,7 +58,7 @@ const WatchPage = () => {
             <CommentsContainer />
          </div>
          {/* LIVE CHAT/suggestions tab */}
-         <div className="w-[30%] mr-2">
+         <div className="w-[32%]">
             <LiveChat />
             {/* <div className="p-4">{vidDetails?.snippet?.description}</div>
             <div className="p-4">{vidDetails?.snippet?.description}</div>
