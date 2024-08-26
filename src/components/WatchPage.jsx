@@ -4,6 +4,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { closeNav } from "../utils/appStore/navSlice";
 import { YT_VIDEO_ID_DETAILS } from "../utils/constants";
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
    const [urlParam] = useSearchParams();
@@ -56,11 +57,12 @@ const WatchPage = () => {
             </div> */}
             <CommentsContainer />
          </div>
-         {/* suggestions tab */}
-         <div className="max-w-[30%] min-w-[18%]">
+         {/* LIVE CHAT/suggestions tab */}
+         <div className="w-[30%] mr-2">
+            <LiveChat />
+            {/* <div className="p-4">{vidDetails?.snippet?.description}</div>
             <div className="p-4">{vidDetails?.snippet?.description}</div>
-            <div className="p-4">{vidDetails?.snippet?.description}</div>
-            <div className="p-4">{vidDetails?.snippet?.description}</div>
+            <div className="p-4">{vidDetails?.snippet?.description}</div> */}
          </div>
       </div>
    );

@@ -80,7 +80,7 @@ const commentsData = [
 const Comment = ({ data }) => {
    //    console.log(data, "Data");
    return (
-      <div className="flex m-2 p-2  items-center bg-slate-800 rounded-lg ">
+      <div className="flex m-2 p-2  items-center bg-slate-900 rounded-lg ">
          <div>
             <img
                src={USER_ICON_URL}
