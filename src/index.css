@@ -19,7 +19,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
    background: red;
-   border-radius: 10px;
+   border-radius: 15px;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {

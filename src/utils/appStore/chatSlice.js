@@ -7,11 +7,13 @@ const chatSlice = createSlice({
    },
    reducers: {
       addMsg: (state, action) => {
-         state.messages.push(action.payload);
+         if (state.messages.length > 30) {
+            state.messages.splice(30, 1);
+         }
+         state.messages.unshift(action.payload);
       },
    },
 });
 
-
-export const {addMsg} = chatSlice.actions
-export default chatSlice.reducer
+export const { addMsg } = chatSlice.actions;
+export default chatSlice.reducer;
