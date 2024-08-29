@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const navSlice = createSlice({
    name: "nav",
    initialState: {
-      nav: true,
+      nav: false,
    },
    reducers: {
       navigation: (state, action) => {
