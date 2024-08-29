@@ -9,6 +9,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { navigation } from "../utils/appStore/navSlice";
 import { cacheResults } from "../utils/appStore/searchCacheSlice";
+import { searchPage, searchQuery } from "../utils/appStore/searchVidSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
    const [searchText, setSearchText] = useState("");
@@ -16,6 +18,8 @@ const Header = () => {
    const [showSuggestions, setShowSuggestions] = useState(false);
    const cache = useSelector((store) => store.searchCache.searchStrings);
    const dispatch = useDispatch();
+   const navigate = useNavigate();
+
    const handleSidebar = () => {
       dispatch(navigation());
       console.log("Clicked");
@@ -46,6 +50,17 @@ const Header = () => {
          })
       );
    };
+
+   const searchQueryYT = (e) => {
+      e.preventDefault();
+      dispatch(searchPage());
+      dispatch(searchQuery(searchText));
+      navigate("/query");
+      setShowSuggestions(false);
+      
+      // setSearchText(e.target.innerText);
+      // console.log(searchText, "searchTextsearchText");
+   };
    return (
       <>
          <div className="flex justify-between align-middle items-center -mt-4 sm:-mt-2 md:-mt-2 ">
@@ -65,7 +80,7 @@ const Header = () => {
             <div className="hidden sm:flex md:flex items-center justify-center text-lg w-[100%] sm:w-[70%] md:w-[70%]">
                <div className="w-[100%] sm:w-[70%] md:w-[70%]">
                   <form
-                     onSubmit={(e) => e.preventDefault()}
+                     onSubmit={(e) => searchQueryYT(e)}
                      className="flex w-[100%]  "
                   >
                      <input
@@ -74,7 +89,7 @@ const Header = () => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                         onFocus={() => setShowSuggestions(true)}
-                        onBlur={() => setShowSuggestions(false)}
+                        // onBlur={() => setShowSuggestions(false)}
                         className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[70%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
                      />
                      <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[25%] sm:w-[10%] md:w-[10%] justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
@@ -93,6 +108,11 @@ const Header = () => {
                               key={suggest}
                               onClick={(e) => {
                                  console.log(e.target.innerText);
+                                 dispatch(searchPage());
+                                 dispatch(searchQuery(e.target.innerText));
+                                 navigate("/query");
+                                 setSearchText(e.target.innerText);
+                                 setShowSuggestions(false);
                               }}
                            >
                               <span className="pr-2">
