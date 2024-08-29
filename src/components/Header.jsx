@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
    AUTO_SUGGEST_API_URL,
    BTN_SEARCH_ICON_URL,
@@ -19,7 +19,7 @@ const Header = () => {
    const cache = useSelector((store) => store.searchCache.searchStrings);
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
+   const inputRef = useRef(null);
    const handleSidebar = () => {
       dispatch(navigation());
       console.log("Clicked");
@@ -57,7 +57,9 @@ const Header = () => {
       dispatch(searchQuery(searchText));
       navigate("/query");
       setShowSuggestions(false);
-      
+      if (inputRef.current) {
+         inputRef.current.blur();
+      }
       // setSearchText(e.target.innerText);
       // console.log(searchText, "searchTextsearchText");
    };
@@ -89,6 +91,7 @@ const Header = () => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                         onFocus={() => setShowSuggestions(true)}
+                        ref={inputRef}
                         // onBlur={() => setShowSuggestions(false)}
                         className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[70%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
                      />
