@@ -79,11 +79,11 @@ const Header = () => {
                </a>
                {/* </Link> */}
             </div>
-            <div className="hidden sm:flex md:flex items-center justify-center text-lg w-[100%] sm:w-[70%] md:w-[70%]">
-               <div className="w-[100%] sm:w-[70%] md:w-[70%]">
+            <div className="hidden sm:flex md:flex items-center justify-center  align-middle text-lg w-[35rem]">
+               <div className="w-full">
                   <form
                      onSubmit={(e) => searchQueryYT(e)}
-                     className="flex w-[100%]  "
+                     className="flex w-full"
                   >
                      <input
                         type="text"
@@ -93,9 +93,9 @@ const Header = () => {
                         onFocus={() => setShowSuggestions(true)}
                         ref={inputRef}
                         // onBlur={() => setShowSuggestions(false)}
-                        className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[70%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
+                        className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[88%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
                      />
-                     <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[25%] sm:w-[10%] md:w-[10%] justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
+                     <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[10%]  justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
                         <img
                            src={BTN_SEARCH_ICON_URL}
                            alt="searchIcon"
@@ -104,7 +104,7 @@ const Header = () => {
                      </button>
                   </form>
                   {showSuggestions && (
-                     <div className=" absolute rounded-lg bg-[#272727] w-[70%] z-10">
+                     <div className=" absolute rounded-lg bg-[#272727] w-[31rem] z-10">
                         {suggestions.map((suggest) => (
                            <div
                               className="py-1 pl-4 bg-[#272727] hover:text-gray-400 hover:bg-black flex  items-center rounded-lg"
