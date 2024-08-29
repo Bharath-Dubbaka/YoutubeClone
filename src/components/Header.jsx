@@ -11,6 +11,7 @@ import { navigation } from "../utils/appStore/navSlice";
 import { cacheResults } from "../utils/appStore/searchCacheSlice";
 import { searchPage, searchQuery } from "../utils/appStore/searchVidSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
    const [searchText, setSearchText] = useState("");
@@ -74,13 +75,13 @@ const Header = () => {
                   onClick={handleSidebar}
                />
                {/* <Link to="/"> */}
-               <a href="/">
+               <Link to="/">
                   <img src={YT_LOGO_URL} alt="logoYT" className="h-24 pl-4" />
-               </a>
+               </Link>
                {/* </Link> */}
             </div>
             <div className="hidden sm:flex md:flex items-center justify-center  align-middle text-lg w-[35rem]">
-               <div className="w-full">
+               <div className="w-full ">
                   <form
                      onSubmit={(e) => searchQueryYT(e)}
                      className="flex w-full"
@@ -91,8 +92,12 @@ const Header = () => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                         onFocus={() => setShowSuggestions(true)}
+                        onBlur={() => {
+                           setTimeout(() => {
+                              setShowSuggestions(false);
+                           }, 400);
+                        }}
                         ref={inputRef}
-                        // onBlur={() => setShowSuggestions(false)}
                         className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[88%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
                      />
                      <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[10%]  justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
