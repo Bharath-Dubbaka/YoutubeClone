@@ -10,7 +10,7 @@ const SearchVideoRes = () => {
    // console.log(navStatus);
    const ytSearchVideoList = async () => {
       const data = await fetch(
-         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchQuery}&key=` +
+         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${searchQuery}&type=video&key=` +
             import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
       );
       const json = await data.json();
