@@ -10,7 +10,7 @@ const SearchVideoRes = () => {
    // console.log(navStatus);
    const ytSearchVideoList = async () => {
       const data = await fetch(
-         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${searchQuery}&type=video&key=` +
+         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=36&q=${searchQuery}&type=video&key=` +
             import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
       );
       const json = await data.json();
@@ -25,22 +25,26 @@ const SearchVideoRes = () => {
    if (!searchNavigation) return null;
    console.log(searchResults, "searchResultssearchResults");
    return (
-      <div className="flex flex-wrap justify-around mb-8">
-         {searchResults &&
-            searchResults.map((video) => {
-               {
-                  /* return <div key={video.id.videoId}>{video?.snippet?.title}</div>; */
-               }
-               return (
-                  <Link
-                     key={video.id.videoId}
-                     to={"/watch?v=" + video.id.videoId}
-                     className="no-underline decoration-transparent w-3/4 sm:w-42  md:w-[23%]"
-                  >
-                     <VideoCard videoDetails={video} />
-                  </Link>
-               );
-            })}
+      <div className="flex-col ">
+         {" "}
+         <span className="font-bold text-2xl pl-4"> Search Results:</span>
+         <div className="flex flex-wrap justify-around mb-8">
+            {searchResults &&
+               searchResults.map((video) => {
+                  {
+                     /* return <div key={video.id.videoId}>{video?.snippet?.title}</div>; */
+                  }
+                  return (
+                     <Link
+                        key={video.id.videoId}
+                        to={"/watch?v=" + video.id.videoId}
+                        className="no-underline decoration-transparent w-3/4 sm:w-42  md:w-[23%]"
+                     >
+                        <VideoCard videoDetails={video} />
+                     </Link>
+                  );
+               })}
+         </div>
       </div>
    );
 };
