@@ -9,13 +9,17 @@ const SearchVideoRes = () => {
    const [searchResults, setSearchResults] = useState(null);
    // console.log(navStatus);
    const ytSearchVideoList = async () => {
-      const data = await fetch(
-         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=36&q=${searchQuery}&type=video&key=` +
-            import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
-      );
-      const json = await data.json();
-      setSearchResults(json.items);
-      console.log(json);
+      try {
+         const data = await fetch(
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=36&q=${searchQuery}&type=video&key=` +
+               import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
+         );
+         const json = await data.json();
+         setSearchResults(json.items);
+         console.log(json);
+      } catch (error) {
+         setSearchResults(error);
+      }
    };
 
    useEffect(() => {
@@ -23,6 +27,25 @@ const SearchVideoRes = () => {
    }, [searchQuery]);
 
    if (!searchNavigation) return null;
+   if (searchResults.length === 0) {
+      return (
+         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
+            <div>
+               Found NO results found with keyword
+               <span className=" text-red-700 font-bold pl-2">
+                  "{searchQuery}"
+               </span>
+            </div>
+         </div>
+      );
+   } else if (!searchResults) {
+      return (
+         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
+            Exceeded API limit/quota, please try again after 12:00PM pacific
+            time
+         </div>
+      );
+   }
    console.log(searchResults, "searchResultssearchResults");
    return (
       <div className="flex-col ">
