@@ -27,7 +27,14 @@ const SearchVideoRes = () => {
    }, [searchQuery]);
 
    if (!searchNavigation) return null;
-   if (searchResults.length === 0) {
+   if (!searchResults) {
+      return (
+         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
+            Exceeded API limit/quota, please try again after 12:00PM pacific
+            time
+         </div>
+      );
+   } else if (searchResults.length === 0) {
       return (
          <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
             <div>
@@ -36,13 +43,6 @@ const SearchVideoRes = () => {
                   "{searchQuery}"
                </span>
             </div>
-         </div>
-      );
-   } else if (!searchResults) {
-      return (
-         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
-            Exceeded API limit/quota, please try again after 12:00PM pacific
-            time
          </div>
       );
    }
