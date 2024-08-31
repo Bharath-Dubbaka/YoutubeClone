@@ -1,17 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-   AUTO_SUGGEST_API_URL,
-   BTN_SEARCH_ICON_URL,
-   HAMBURGER_ICON_URL,
-   USER_ICON_URL,
-   YT_LOGO_URL,
-} from "../utils/constants";
+import { AUTO_SUGGEST_API_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { navigation } from "../utils/appStore/navSlice";
 import { cacheResults } from "../utils/appStore/searchCacheSlice";
 import { searchPage, searchQuery } from "../utils/appStore/searchVidSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import hamburger_icon from "../assets/hamburger_icon.png";
+import search_icon from "../assets/search_icon.png";
+import user_avatar from "../assets/user_avatar.png";
+import logo_icon from "../assets/logo_icon.png";
 
 const Header = () => {
    const [searchText, setSearchText] = useState("");
@@ -69,14 +67,14 @@ const Header = () => {
          <div className="flex justify-between align-middle items-center -mt-4 sm:-mt-2 md:-mt-2 ">
             <div className="flex items-center cursor-pointer">
                <img
-                  src={HAMBURGER_ICON_URL}
+                  src={hamburger_icon}
                   alt="hamburgerMenu"
                   className="pl-4 h-8"
                   onClick={handleSidebar}
                />
                {/* <Link to="/"> */}
                <Link to="/">
-                  <img src={YT_LOGO_URL} alt="logoYT" className="h-24 pl-4" />
+                  <img src={logo_icon} alt="logoYT" className="h-24 pl-4" />
                </Link>
                {/* </Link> */}
             </div>
@@ -102,7 +100,7 @@ const Header = () => {
                      />
                      <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[10%]  justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
                         <img
-                           src={BTN_SEARCH_ICON_URL}
+                           src={search_icon}
                            alt="searchIcon"
                            className="h-7 "
                         />
@@ -125,7 +123,7 @@ const Header = () => {
                            >
                               <span className="pr-2">
                                  <img
-                                    src={BTN_SEARCH_ICON_URL}
+                                    src={search_icon}
                                     alt="searchIcon"
                                     className="h-5 "
                                  />
@@ -138,7 +136,7 @@ const Header = () => {
                </div>
             </div>
             <div>
-               <img src={USER_ICON_URL} alt="userIcon" className="h-9 pr-4" />
+               <img src={user_avatar} alt="userIcon" className="h-9 pr-4" />
             </div>
          </div>
          {/* FOR MOBILE VIEW SEARCH BAR */}
@@ -153,11 +151,7 @@ const Header = () => {
                   className="rounded-l-full border-gray-600 bg-black border-2 h-10 w-[80%] pl-4  outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 "
                />
                <button className=" bg-slate-800 rounded-r-full border-gray-600 border-2 h-10 flex items-center w-[15%] sm:w-[10%] md:w-[10%] justify-center outline-none focus:outline-none focus:ring-0.5 focus:ring-blue-900 focus:border-blue-900 focus:ring-offset-0 p-0 ">
-                  <img
-                     src={BTN_SEARCH_ICON_URL}
-                     alt="searchIcon"
-                     className="h-7 "
-                  />
+                  <img src={search_icon} alt="searchIcon" className="h-7 " />
                </button>
             </form>
          </div>

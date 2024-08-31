@@ -1,5 +1,5 @@
 import React from "react";
-import { USER_ICON_URL } from "../utils/constants";
+import user_avatar from "../assets/user_avatar.png";
 
 const ChatMsg = ({ name, message }) => {
    // console.log(name, message, "MFNFN");
@@ -7,7 +7,7 @@ const ChatMsg = ({ name, message }) => {
       <div className="flex my-2 items-top">
          <div className="pr-2 ">
             <img
-               src={USER_ICON_URL}
+               src={user_avatar}
                alt="userIcon"
                className="min-w-6 max-w-6"
             />

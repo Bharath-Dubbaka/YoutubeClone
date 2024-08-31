@@ -1,5 +1,6 @@
 import React from "react";
 import { USER_ICON_URL } from "../utils/constants";
+import user_avatar from "../assets/user_avatar.png";
 
 const commentsData = [
    {
@@ -82,11 +83,7 @@ const Comment = ({ data }) => {
    return (
       <div className="flex m-2 p-2  items-center bg-slate-900 rounded-lg ">
          <div>
-            <img
-               src={USER_ICON_URL}
-               alt="userAvatar"
-               className="w-8 h-8 mr-2"
-            />
+            <img src={user_avatar} alt="userAvatar" className="w-8 h-8 mr-2" />
          </div>
          <div>
             <div className=" font-bold">{data.name}</div>
