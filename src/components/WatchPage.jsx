@@ -11,10 +11,10 @@ import thumbs_down_icon from "../assets/thumbs_down_icon.png";
 const WatchPage = () => {
    const [urlParam] = useSearchParams();
    const ytKeyURL = urlParam.get("v");
-   // console.log(urlParam.get("v"));
    const dispatch = useDispatch();
    const [vidDetails, setVidDetails] = useState(null);
-   console.log(vidDetails, "vidDetailsvidDetailsvidDetails");
+   const [channelDetails, setChannelDetails] = useState(null);
+
    const videoKeyDetails = async (ytKeyURL) => {
       const data = await fetch(
          `${YT_VIDEO_ID_DETAILS}${ytKeyURL}&key=${
@@ -23,14 +23,50 @@ const WatchPage = () => {
       );
       const json = await data.json();
       setVidDetails(json.items[0]);
-      //   console.log(json, "ID VID DETAILS");
+      const chanID = json?.items[0]?.snippet?.channelId;
+      // console.log(chanID);
+      videoChannelDetails(chanID);
+      // const chanDetails = await videoChannelDetails(
+      //    vidDetails?.snippet?.channelId
+      // );
+      // console.log(chanDetails);
+      // setChannelDetails(chanDetails);
+   };
+
+   const videoChannelDetails = async (channelId) => {
+      const data = await fetch(
+         `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=` +
+            import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
+      );
+      const json = await data.json();
+      setChannelDetails(json.items[0]);
    };
    useEffect(() => {
       dispatch(closeNav());
       videoKeyDetails(ytKeyURL);
    }, []);
+
    if (!vidDetails) return null;
    // console.log(vidDetails);
+   const abbreviate_number = (num, fixed) => {
+      if (num === null) {
+         return null;
+      } // terminate early
+      if (num === 0) {
+         return "0";
+      } // terminate early
+      fixed = !fixed || fixed < 0 ? 0 : fixed; // number of decimal places to show
+      var b = num.toPrecision(2).split("e"), // get power
+         k = b.length === 1 ? 0 : Math.floor(Math.min(b[1].slice(1), 14) / 3), // floor at decimals, ceiling at trillions
+         c =
+            k < 1
+               ? num.toFixed(0 + fixed)
+               : (num / Math.pow(10, k * 3)).toFixed(1 + fixed), // divide by power
+         d = c < 0 ? c : Math.abs(c), // enforce -0 is 0
+         e = d + ["", "K", "M", "B", "T"][k]; // append power
+      return e;
+   };
+
    return (
       <div className="flex  justify-evenly w-full overflow-hidden">
          <div className="mx-8 ml-4 w-[62%]">
@@ -51,18 +87,42 @@ const WatchPage = () => {
             <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.title}
             </div>
-            <div className="mt-4 pl-1 font-bold text text-xl flex justify-between align-top">
-               {vidDetails?.snippet?.channelTitle}
+            <div className="my-6 pl-1 font-bold text text-lg flex justify-between align-top">
+               <div className="flex items-center">
+                  <div>
+                     <img
+                        src={channelDetails?.snippet?.thumbnails?.high?.url}
+                        alt="channel_logo"
+                        className="h-12 w-12 rounded-full mr-2"
+                     />
+                  </div>
+                  <div className="">
+                     <div>{channelDetails?.snippet?.title}</div>
+                     <div className="text-sm text-slate-400">
+                        {abbreviate_number(
+                           parseInt(
+                              channelDetails?.statistics?.subscriberCount,
+                              0
+                           )
+                        )}{" "}
+                        subscribers
+                     </div>
+                  </div>
+               </div>
                <div className="flex text-lg cursor-pointer">
-                  <div className="px-4 py-1 border border-slate-700 rounded-l-full flex  items-center">
+                  <div className="px-4 py-1 border border-slate-700 rounded-l-full flex  items-center  bg-slate-900">
                      <img
                         src={thumbs_up_icon}
                         alt="thumbs_up_icon"
                         className="w-5 h-5 mr-1"
                      />{" "}
-                     {vidDetails?.statistics?.likeCount}
+                     {abbreviate_number(
+                        parseInt(vidDetails?.statistics?.likeCount),
+                        0
+                     )}{" "}
+                     Likes
                   </div>
-                  <div className="px-4 border py-1  border-slate-700 rounded-r-full flex  items-center">
+                  <div className="px-4 border py-1  border-slate-700 rounded-r-full flex  items-center  bg-slate-900">
                      <img
                         src={thumbs_down_icon}
                         alt="thumbs_down_icon"
