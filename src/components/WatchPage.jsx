@@ -91,7 +91,7 @@ const WatchPage = () => {
                <div className="flex items-center">
                   <div>
                      <img
-                        src={channelDetails?.snippet?.thumbnails?.high?.url}
+                        src={channelDetails?.snippet?.thumbnails?.default?.url}
                         alt="channel_logo"
                         className="h-12 w-12 rounded-full mr-2"
                      />
