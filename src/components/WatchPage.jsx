@@ -5,6 +5,8 @@ import { closeNav } from "../utils/appStore/navSlice";
 import { YT_VIDEO_ID_DETAILS } from "../utils/constants";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import thumbs_up_icon from "../assets/thumbs_up_icon.png";
+import thumbs_down_icon from "../assets/thumbs_down_icon.png";
 
 const WatchPage = () => {
    const [urlParam] = useSearchParams();
@@ -12,7 +14,7 @@ const WatchPage = () => {
    // console.log(urlParam.get("v"));
    const dispatch = useDispatch();
    const [vidDetails, setVidDetails] = useState(null);
-
+   console.log(vidDetails, "vidDetailsvidDetailsvidDetails");
    const videoKeyDetails = async (ytKeyURL) => {
       const data = await fetch(
          `${YT_VIDEO_ID_DETAILS}${ytKeyURL}&key=${
@@ -31,9 +33,9 @@ const WatchPage = () => {
    // console.log(vidDetails);
    return (
       <div className="flex  justify-evenly w-full overflow-hidden">
-         <div className="mx-8 ml-4 w-[65%]">
+         <div className="mx-8 ml-4 w-[62%]">
             <iframe
-               className=" rounded-lg w-full"
+               className=" rounded-lg  w-[100%]"
                height="493"
                src={
                   "https://www.youtube.com/embed/" +
@@ -49,8 +51,26 @@ const WatchPage = () => {
             <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.title}
             </div>
-            <div className="mt-4 pl-1 font-semibold text-2xl">
+            <div className="mt-4 pl-1 font-bold text text-xl flex justify-between align-top">
                {vidDetails?.snippet?.channelTitle}
+               <div className="flex text-lg cursor-pointer">
+                  <div className="px-4 py-1 border border-slate-700 rounded-l-full flex  items-center">
+                     <img
+                        src={thumbs_up_icon}
+                        alt="thumbs_up_icon"
+                        className="w-5 h-5 mr-1"
+                     />{" "}
+                     {vidDetails?.statistics?.likeCount}
+                  </div>
+                  <div className="px-4 border py-1  border-slate-700 rounded-r-full flex  items-center">
+                     <img
+                        src={thumbs_down_icon}
+                        alt="thumbs_down_icon"
+                        className="w-5 h-5 mr-1"
+                     />{" "}
+                     Dislike
+                  </div>
+               </div>
             </div>
             {/* <div className="mt-4 pl-1 font-semibold text-2xl">
                {vidDetails?.snippet?.description}
