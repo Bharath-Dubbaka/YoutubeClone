@@ -2,51 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
+import Shimmer from "./ShimmerUI/Shimmer";
 
 const SearchVideoRes = () => {
    const searchNavigation = useSelector((store) => store.search.searchNav);
    const searchQuery = useSelector((store) => store.search.searchQuery);
    const [searchResults, setSearchResults] = useState(null);
+   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState(null);
    // console.log(navStatus);
    const ytSearchVideoList = async () => {
+      setLoading(true);
+      setError(null);
       try {
          const data = await fetch(
             `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=36&q=${searchQuery}&type=video&key=` +
                import.meta.env.VITE_REACT_APP_YOUTUBE_API_KEY
          );
+         if (!data.ok) {
+            throw new Error(
+               "Exceeded API limit/quota, please try again after 12:00PM Pacific time"
+            );
+         }
          const json = await data.json();
          setSearchResults(json.items);
-         console.log(json);
+
+         if (json.items.length === 0) {
+            setError(`No results found for "${searchQuery}"`);
+         }
+         // console.log(json);
       } catch (error) {
-         setSearchResults(error);
+         setError(error.message || "Failed to fetch data");
+      } finally {
+         setLoading(false);
       }
    };
 
    useEffect(() => {
-      ytSearchVideoList(searchQuery);
+      if (searchQuery) {
+         ytSearchVideoList(searchQuery);
+      }
    }, [searchQuery]);
 
    if (!searchNavigation) return null;
-   if (!searchResults) {
+   if (loading) {
       return (
-         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
-            Exceeded API limit/quota, please try again after 12:00PM pacific
-            time
-         </div>
-      );
-   } else if (searchResults.length === 0) {
-      return (
-         <div className="w-full  h-[100vh] font-bold text-2xl pt-24 flex justify-center">
-            <div>
-               Found NO results found with keyword
-               <span className=" text-red-700 font-bold pl-2">
-                  "{searchQuery}"
-               </span>
-            </div>
+         <div className="w-full h-[100vh] flex justify-center items-center">
+            <Shimmer />
          </div>
       );
    }
-   console.log(searchResults, "searchResultssearchResults");
+   if (error) {
+      return (
+         <div className="w-full h-[100vh] font-bold text-2xl pt-24 flex justify-center">
+            {error}
+         </div>
+      );
+   }
+   // console.log(searchResults, "searchResultssearchResults");
    return (
       <div className="flex-col ">
          {" "}

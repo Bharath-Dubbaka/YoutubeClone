@@ -3,6 +3,7 @@ import { YOUTUBE_API_URL } from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import { hocVideo } from "./VideoCard";
+import Shimmer from "./ShimmerUI/Shimmer";
 
 const VideoContainer = () => {
    const HighTrendingVideo = hocVideo(VideoCard);
@@ -18,7 +19,7 @@ const VideoContainer = () => {
       ytPopularVids();
    }, []);
 
-   if (popVideos.length <= 0) return null;
+   if (popVideos.length <= 0) return <Shimmer />;
    return (
       <div className="bg-[#0F0F0F] text-white flex flex-wrap justify-around mb-8">
          {popVideos.map((video) => (
