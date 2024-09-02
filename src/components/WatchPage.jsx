@@ -7,6 +7,7 @@ import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
 import thumbs_up_icon from "../assets/thumbs_up_icon.png";
 import thumbs_down_icon from "../assets/thumbs_down_icon.png";
+import ShimmerWatchPage from "./shimmerUI/ShimmerWatchPage";
 
 const WatchPage = () => {
    const [urlParam] = useSearchParams();
@@ -46,7 +47,7 @@ const WatchPage = () => {
       videoKeyDetails(ytKeyURL);
    }, []);
 
-   if (!vidDetails) return null;
+   if (!vidDetails) return <ShimmerWatchPage />;
    // console.log(vidDetails);
    const abbreviate_number = (num, fixed) => {
       if (num === null) {

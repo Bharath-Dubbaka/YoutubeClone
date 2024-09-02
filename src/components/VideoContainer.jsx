@@ -19,7 +19,7 @@ const VideoContainer = () => {
       ytPopularVids();
    }, []);
 
-   if (popVideos.length <= 0) return <Shimmer />;
+   if (!popVideos) return <Shimmer />;
    return (
       <div className="bg-[#0F0F0F] text-white flex flex-wrap justify-around mb-8">
          {popVideos.map((video) => (
